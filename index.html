@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A Frustratingly Simple Yet Highly Effective Attack Baseline: Over 90% Success Rate Against the Strong Black-box Models of GPT-4.5/4o/o1.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Frustratingly Simple Yet Highly Effective Attack Baseline: Over 90% Success Rate Against the Strong Black-box Models of GPT-4.5/4o/o1</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container" style="max-width: 100%; width: 1200px; margin: auto;">
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered">
+          <h1 class="title is-1 publication-title">A Frustratingly Simple Yet Highly Effective Attack Baseline: Over 90% Success Rate Against the Strong Black-box Models of GPT-4.5/4o/o1</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=J-VsziYAAAAJ&hl=en">Zhaoyi Li</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://zhiqiangshen.com/">Xiaohan Zhao</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://wu-dd.github.io/">Dongdong Wu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=SI_9kD0AAAAJ">Jiacheng Cui</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zhiqiangshen.com/">Zhiqiang Shen</a><sup>1</sup>,</span>
+            <span class="author-block">
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Mohamed bin Zayed University of Artificial Intelligence</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/VILA-Lab/M-Attack"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+<section class="hero teaser mb-0">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/main_alg1.jpg" alt="Teaser Image" style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+         Illustration of our proposed framework for generating highly transferable adversarial samples.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 20px;">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Despite strong performance on open-source large vision-language models (LVLMs), transfer-based targeted attacks often fail against black-box commercial LVLMs. Analyzing failed adversarial perturbations reveals that the learned perturbations typically originate from a uniform distribution and lack clear semantic details, resulting in unintended responses. This critical absence of semantic information leads commercial LVLMs to either ignore the perturbation entirely or misinterpret its embedded semantics, thereby causing the attack to fail. To overcome these issues, we notice that identifying core semantic objects is a key objective for models trained with various datasets and methodologies. This insight motivates our approach that refines semantic clarity by encoding explicit semantic details within local regions, thus ensuring interoperability and capturing finer-grained features, and by concentrating modifications on semantically rich areas rather than applying them uniformly. 
+          </p>
+          <p>
+            To achieve this, we propose a simple yet highly effective solution: at each optimization step, the adversarial image is cropped randomly by a controlled aspect ratio and scale, resized, and then aligned with the target image in the embedding space. Experimental results confirm our hypothesis. Our adversarial examples crafted with local-aggregated perturbations focused on crucial regions exhibit surprisingly good transferability to commercial LVLMs, including GPT-4.5, GPT-4o, Gemini-2.0-flash, Claude-3.5-sonnet, Claude-3.7-sonnet, and even reasoning models like o1, Claude-3.7-thinking and Gemini-2.0-thinking. Our approach achieves success rates exceeding 90% on GPT-4.5/4o, o1, significantly outperforming all prior state-of-the-art attack methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h1 class="title has-text-centered">Visualizations</h1>
+      <img src="./static/images/contrast_adv_images.jpg" alt="Teaser Image" style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+        Adversarial samples generated by different methods when <span>&epsilon;= 16</span>.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/appendix_adv1.jpg" alt="Teaser Image" style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+        Adversarial samples generated by different methods when <span>&epsilon;= 4,8</span>.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser" style="margin-bottom: 40px;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column">
+        <h2 class="title is-4">Insights over Failed Attacks</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Empirical cumulative distribution function of failed adversarial samples vs. uniform distribution. Shading shows standard deviation.
+            </p>
+            <img src="./static/images/perturbation_ecdfs.jpg" alt="Teaser Image 2" style="width: 100%; height: auto;">
+          </div>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Global similarity is less expressive</h2>
+          <p>
+            Comparison of global similarity and ASR across different matching methods, including <em>Global to Global</em>, <em>Local to Global</em> and <em>Local to Local</em>.
+          </p>
+          <img src="./static/images/global_similarity_plot.jpg" alt="Teaser Image 1" style="width: 100%; height: auto;">
+        </div>
+      </div>     
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h1 class="title has-text-centered">Experiment Results</h1>
+      <img src="./static/images/table.png" alt="Teaser Image" style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+        Comparison with the state-of-the-art approaches.
+      </h2>
+    </div>
+  </div>
+
+
+  <!-- Four subplots in a 2x2 grid -->
+  <style>
+    .subplot-image {
+      max-width: 100%;  /* 限制图片宽度 */
+      height: auto;  /* 保持纵横比 */
+      display: block;  
+      margin: 0 auto;
+    }
+  </style>
+  
+  <div class="container has-text-centered">
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/ablation_ASR_1.jpg" class="subplot-image" alt="Subplot 1"/>
+        <p>KMR<sub>A</sub>%</p>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/ablation_ASR_2.jpg" class="subplot-image" alt="Subplot 2"/>
+        <p>KMR<sub>B</sub>%</p>
+      </div>
+    </div>
+  
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/ablation_ASR_3.jpg" class="subplot-image" alt="Subplot 3"/>
+        <p>KMR<sub>C</sub>%</p>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/ablation_ASR_4.jpg" class="subplot-image" alt="Subplot 4"/>
+        <p>ASR%</p>
+      </div>    
+    </div>
+  
+    <h2 class="subtitle has-text-centered">
+      Ablation on our two proposed strategies: Local-level matching and ensemble, conducted by separately removing <em>local crop of target image</em> (LCT), <em>local crop of source image</em> (LCS), and <em>ensemble</em> (ENS). Removing LCT has only a marginal impact.
+    </h2>
+  </div>  
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h1 class="title has-text-centered">Real-world Scenario Screenshots</h1>
+        <h2 class="title is-5">Here are two example responses from commercial LVLMs to targeted attacks generated by our method.</h2>
+      </div>
+    </div>
+    
+    <!-- <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/target_image1.png" alt="Example Image 1" class="small-image" style="width: 78%;">
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <img src="./static/images/target_image2.png" alt="Example Image 2" class="small-image" style="width: 100%;">
+      </div>
+    </div> -->
+    
+
+    <div class="container has-text-centered mb-6">
+      <div class="columns is-centered">
+        <!-- 左侧图片 -->
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./static/images/target_image1.png" alt="Target Image 1" class="target-image" style="width: 75%;">
+          </figure>
+          <p>(i)</p>
+        </div>
+    
+        <!-- 右侧图片 -->
+        <div class="column is-one-third">
+          <figure class="image">
+            <img src="./static/images/target_image2.png" alt="Target Image 2" class="target-image" style="width: 100%;">
+          </figure>
+          <p>(ii)</p>
+        </div>
+      </div>
+    
+      <!-- 图片描述 -->
+      <p class="figure-caption"><strong>Target images for the following two groups of example responses.</strong> </p>
+    </div>
+    
+    
+    <div class="container mt-6 mb-6">
+      <div class="columns is-multiline is-centered">        
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/4o_1.jpg" alt="GPT-4o">
+            </figure>
+            <p class="has-text-centered"><strong>(a) GPT-4o</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gemini_1.jpg" alt="Gemini-2.0-Flash">
+            </figure>
+            <p class="has-text-centered"><strong>(b) Gemini-2.0-Flash</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude35_1.jpg" alt="Claude-3.5-Sonnet">
+            </figure>
+            <p class="has-text-centered"><strong>(c) Claude-3.5-Sonnet</strong></p>
+          </div>
+        </div>
+    
+
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/o1_1.jpg" alt="GPT-4o">
+            </figure>
+            <p class="has-text-centered"><strong>(d) GPT-4o</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gemini_thk_1.jpg" alt="Gemini-2.0-Flash-Thinking">
+            </figure>
+            <p class="has-text-centered"><strong>(e) Gemini-2.0-Flash-Thinking</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude37_1.jpg" alt="Claude-3.7-Thinking">
+            </figure>
+            <p class="has-text-centered"><strong>(f) Claude-3.7-Thinking</strong></p>
+          </div>
+        </div>
+      </div>
+      <p class="has-text-centered mt-4"><strong>(i)</strong></p>
+    </div>
+    
+
+    <div class="container mb-6">
+      <!-- <h3 class="title is-4 has-text-centered">Second Experiment</h3> -->
+      <div class="columns is-multiline is-centered">
+  
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/4o2.jpg" alt="GPT-4o">
+            </figure>
+            <p class="has-text-centered"><strong>(a) GPT-4o</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gemini_2.jpg" alt="Gemini-2.0-Flash">
+            </figure>
+            <p class="has-text-centered"><strong>(b) Gemini-2.0-Flash</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude35_2.jpg" alt="Claude-3.5-Sonnet">
+            </figure>
+            <p class="has-text-centered"><strong>(c) Claude-3.5-Sonnet</strong></p>
+          </div>
+        </div>
+    
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/o1_2.jpg" alt="GPT-4o">
+            </figure>
+            <p class="has-text-centered"><strong>(d) GPT-4o</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gemini_thk_2.jpg" alt="Gemini-2.0-Flash-Thinking">
+            </figure>
+            <p class="has-text-centered"><strong>(e) Gemini-2.0-Flash-Thinking</strong></p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude37_2.jpg" alt="Claude-3.7-Thinking">
+            </figure>
+            <p class="has-text-centered"><strong>(f) Claude-3.7-Thinking</strong></p>
+          </div>
+        </div>
+      </div>
+      <p class="has-text-centered mt-4"><strong>(ii)</strong></p>
+    </div>
+    
+    <div class="container mb-6">
+      <h2 class="title is-5">Example responses from the latest commercial LVLMs to targeted attacks generated by our method.</h2>
+    
+      <div class="columns is-multiline is-centered">
+    
+        <!-- 第一行 -->
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gpt45_1.jpg" alt="GPT-4o">
+            </figure>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gpt45_2.jpg" alt="Gemini-2.0-Flash">
+            </figure>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/gpt45_3.jpg" alt="Claude-3.5-Sonnet">
+            </figure>
+          </div>
+        </div>
+      </div>
+    
+      <!-- 第一行的统一标题 -->
+      <p class="has-text-centered mt-3"><strong>(a) GPT-4.5</strong></p>
+    
+      <div class="columns is-multiline is-centered">
+        <!-- 第二行 -->
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude_1.jpg" alt="GPT-4o">
+            </figure>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude_2.jpg" alt="Gemini-2.0-Flash-Thinking">
+            </figure>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <figure class="image">
+              <img src="./static/images/claude_3.jpg" alt="Claude-3.7-Thinking">
+            </figure>
+          </div>
+        </div>
+      </div>
+    
+      <!-- 第二行的统一标题 -->
+      <p class="has-text-centered mt-3"><strong>(b) Claude-3.7-Sonnet</strong></p>
+    </div>
+    
+    
+        
+    <!--/ Animation. -->
+
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
